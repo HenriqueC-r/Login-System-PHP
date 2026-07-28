@@ -8,6 +8,8 @@
 
 API de autenticação em PHP puro, construída com foco em segurança e boas práticas de mercado. Desenvolvida como back-end para uma aplicação em **Quasar (Vue.js)**, integrando login, cadastro e rotas protegidas por token JWT.
 
+> 🔗 Este é o back-end do projeto. O front-end (Quasar/Vue.js) que consome esta API está em: **[mirianrl/Quasar-Login-Vue.js](https://github.com/mirianrl/Quasar-Login-Vue.js)**
+
 ## Sobre o projeto
 
 Este projeto implementa um fluxo completo de autenticação stateless, sem uso de frameworks — apenas PHP e as bibliotecas essenciais para o que realmente importa: segurança de senha, geração/validação de token e acesso a dados via queries preparadas.
@@ -37,17 +39,16 @@ login_system/
 ├── config/
 │   ├── cors.php               # Headers de CORS centralizados
 │   ├── env.php                # Carregamento do .env
-│   ├── jwt.php                # Definição do segredo JWT
-│   └── verificarToken.php     # Validação de token (ver nota abaixo)
+│   └── jwt.php                # Definição do segredo JWT
 ├── middleware/
-│   └── auth.php               # Middleware de autenticação JWT
+│   └── auth.php               # Middleware de validação de token JWT
 ├── public/
 │   └── api/
 │       ├── index.php          # Health check da API
 │       ├── cadastro.php       # Endpoint de registro de usuário
 │       ├── login.php          # Endpoint de login / geração de token
 │       ├── perfil.php         # Endpoint protegido: dados do usuário logado
-│       └── usuarios.php       # Endpoint protegido: validação de token
+│       └── usuarios.php       # Endpoint protegido: listagem de usuários
 ├── conexao.php                # Conexão PDO com o MySQL
 ├── database.sql               # Script de criação do banco e tabela
 ├── composer.json
@@ -84,6 +85,8 @@ php -S localhost:8000 -t public
 
 A API ficará disponível em `http://localhost:8000/api/`.
 
+> Para testar o fluxo completo (telas de login, cadastro e dashboard), suba também o [front-end](https://github.com/mirianrl/Quasar-Login-Vue.js) apontando para essa URL.
+
 ## Endpoints
 
 | Método | Rota                  | Descrição                              | Autenticação |
@@ -92,7 +95,7 @@ A API ficará disponível em `http://localhost:8000/api/`.
 | POST   | `/api/cadastro.php`    | Cria um novo usuário                     | Não |
 | POST   | `/api/login.php`       | Autentica e retorna um token JWT         | Não |
 | GET    | `/api/perfil.php`      | Retorna os dados do usuário autenticado  | Sim (Bearer Token) |
-| GET    | `/api/usuarios.php`    | Valida o token e retorna dados básicos   | Sim (Bearer Token) |
+| GET    | `/api/usuarios.php`    | Lista os usuários cadastrados            | Sim (Bearer Token) |
 
 ### Exemplo — Cadastro
 
@@ -147,6 +150,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 - Todas as queries usam *prepared statements* via PDO, eliminando SQL Injection.
 - Segredos de ambiente (JWT e banco de dados) nunca vão para o repositório — apenas `.env.example` como referência.
 - Tokens JWT expiram em 1 hora, reduzindo a janela de uso indevido em caso de vazamento.
+
+## Projeto completo
+
+Este back-end faz parte de um sistema de autenticação full stack desenvolvido em dupla:
+
+- **Back-end (PHP)** — este repositório
+- **Front-end (Quasar/Vue.js)** — [mirianrl/Quasar-Login-Vue.js](https://github.com/mirianrl/Quasar-Login-Vue.js)
 
 ## Autores
 
