@@ -150,4 +150,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 
 ## Autores
 
-Desenvolvido por [Caio](https://github.com/HenriqueC-r) (back-end, PHP) em colaboração com o time responsável pelo front-end em Quasar/Vue.js.
+- [Caio](https://github.com/HenriqueC-r) — Back-end (PHP)
+- [Mirian](https://github.com/mirianrl) — Front-end (Quasar/Vue.js)
