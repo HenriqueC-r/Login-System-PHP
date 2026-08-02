@@ -1,7 +1,7 @@
 <?php
 
 require_once "../../config/cors.php";
-require_once "../../middleware/auth.php";
+require_once __DIR__ . "/../../config/verificarToken.php";
 require_once "../../conexao.php";
 
 verificarToken();
